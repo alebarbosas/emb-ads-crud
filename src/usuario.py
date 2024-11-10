@@ -66,6 +66,18 @@ def main():
             listar_user()         
             #TÁ DANDO ERRO 
             
+        elif op == "3":
+            antigoNome=input("Digite o seu antigo nome: ")
+            novoNome=input("Digite o seu novo nome: ")                                
+            novaIdade=input("Digite a sua anitga idade: ") 
+            antigaIdade=input("Digite a sua nova idade: ")      
+            antigoGenero=input("Digite o seu antigo gênero: ")
+            novoGenero=input("Digite o seu novo gênero: ")
+            antigoContato=input("Digite o seu antigo telefone: ")
+            novoContato=input("Digite o seu novo telefone: ")
+            antigoCpf= input("Digite o seu antigo CPF: ")
+            novoCpf= input("Digite o seu novo CPF: ")
+            
             
             
 if __name__ == "__main__":
