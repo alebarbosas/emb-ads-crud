@@ -48,7 +48,7 @@ def atualizar_user(antigoNome, novoNome, novaIdade, novoGenero, novoContato, nov
 
     with open(usersData, 'w') as userDataArquivo:
         json.dump(users, userDataArquivo, indent=4, ensure_ascii=False)
-    print("😙 USUÁRIO ATUALIZADO COM SUCESSO!")
+    print("Usuário atualizado com sucesso")
 
 
 def menu_user():
@@ -78,7 +78,7 @@ def main():
      
         elif op == "2":
             listar_users()         
-            #TÁ DANDO ERRO 
+        
                         
         elif op == "3":
             antigoNome =input("Digite o seu antigo nome: ")
