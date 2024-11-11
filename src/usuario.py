@@ -8,7 +8,8 @@ def carregar_user():
     if not os.path.exists(usersData):
         with open(usersData, 'w') as userDataArquivo:
             json.dump([], userDataArquivo, indent=4)
-
+    with open(usersData, 'r') as userDataArquivo:
+        return json.load(userDataArquivo)
 
 def adicionar_user(nome, idade, genero, contato, cpf):
     users = carregar_user()
@@ -22,20 +23,32 @@ def adicionar_user(nome, idade, genero, contato, cpf):
     print("Você foi cadastrado com sucesso :)")
     
     
-def listar_user():
+def listar_users():
     users = carregar_user()
 
     if users:
-        print("=" *50)
         print("Lista de usuários: ")
-        print("-" *50)
         for user in users:
-            print("*" *50)
-            print(f"Nome: {user['nome']}, Idade: {user['idade']}, Gênero: {user['genero']}, Telefone:{user['telefone']}, CPF:{user['cpf']}")
-            print("*" *50)
-            print("=" *50)
+            print(f"Nome: {user['nome']}, Idade: {user['idade']}, Gênero: {user['genero']}, Contato:{user['contato']}, CPF:{user['cpf']}")
     else:
         print("Nenhum usuário cadastrado")
+
+def atualizar_user(antigoNome, novoNome, novaIdade, novoGenero, novoContato, novoCpf):
+    users = carregar_user()
+
+    for user in users:
+        if user['nome'] == antigoNome:
+            user['nome'] = novoNome
+            user['idade'] = novaIdade
+            user ['contato'] = novoContato
+            user ['genero'] = novoGenero
+            user ['cpf'] = novoCpf
+            
+            break
+
+    with open(usersData, 'w') as userDataArquivo:
+        json.dump(users, userDataArquivo, indent=4, ensure_ascii=False)
+    print("😙 USUÁRIO ATUALIZADO COM SUCESSO!")
 
 
 def menu_user():
@@ -49,11 +62,12 @@ def menu_user():
     
 
 def main(): 
+    
     while True:
         
         menu_user()
         op= input("Escolha uma opção: ")
-    
+        
         if op == "1":
             nome=input("Digite o seu nome: ")          
             idade=input("Digite sua idade: ")      
@@ -61,24 +75,21 @@ def main():
             contato=input("Digite seu telefone: ")
             cpf= input("Digite seu CPF: ")
             adicionar_user(nome,idade,genero,contato,cpf)
-            
+     
         elif op == "2":
-            listar_user()         
+            listar_users()         
             #TÁ DANDO ERRO 
-            
+                        
         elif op == "3":
-            antigoNome=input("Digite o seu antigo nome: ")
+            antigoNome =input("Digite o seu antigo nome: ")
             novoNome=input("Digite o seu novo nome: ")                                
-            novaIdade=input("Digite a sua anitga idade: ") 
-            antigaIdade=input("Digite a sua nova idade: ")      
-            antigoGenero=input("Digite o seu antigo gênero: ")
+            novaIdade=input("Digite a sua anitga idade: ")   
             novoGenero=input("Digite o seu novo gênero: ")
-            antigoContato=input("Digite o seu antigo telefone: ")
             novoContato=input("Digite o seu novo telefone: ")
-            antigoCpf= input("Digite o seu antigo CPF: ")
             novoCpf= input("Digite o seu novo CPF: ")
-            
-            
-            
+            atualizar_user(antigoNome, novoNome, novaIdade, novoGenero, novoContato, novoCpf)
+          
+
+    
 if __name__ == "__main__":
-    main()
+    main() 
